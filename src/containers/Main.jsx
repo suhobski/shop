@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Catalog from './Catalog';
 
 const MainWrap = styled('header')({
   gridArea: 'main',
@@ -9,6 +10,7 @@ const MainWrap = styled('header')({
 const Main = () => (
   <MainWrap>
     <h2>Main</h2>
+    <Catalog />
   </MainWrap>
 );
 
