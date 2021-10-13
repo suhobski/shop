@@ -1,0 +1,7 @@
+// Catalog's types
+export const FETCH_CATALOG_START = 'FETCH_CATALOG_START';
+export const FETCH_CATALOG_SUCCESS = 'FETCH_CATALOG_SUCCESS';
+export const FETCH_CATALOG_ERROR = 'FETCH_CATALOG_ERROR';
+
+// Filter's types
+export const ON_CHANGE_CATEGORY = 'ON_CHANGE_CATEGORY';
