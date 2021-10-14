@@ -5,6 +5,23 @@ import ProductItem from '../components/ProductItem';
 import { fetchCatalog } from '../store/actions/catalog';
 
 const CatalogWrap = styled('section')({});
+const CatalogHeader = styled('header')({
+  padding: '0.5rem',
+  '& button': {
+    marginRight: '0.5rem',
+  },
+  '& button:last-child': {
+    marginRight: 0,
+  },
+});
+
+const ButtonSetCount = styled('button')({
+  width: 85,
+  padding: '0.5rem',
+  border: 'none',
+  outline: 'none',
+  borderRadius: 4,
+});
 
 const CatalogListItems = styled('ul')({
   gridArea: 'header',
@@ -24,17 +41,20 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
   useEffect(() => fetchComponentCatalog(), []);
   return (
     <CatalogWrap>
-      <header>
-        <button onClick={() => setItemsCount(8)} type="button">
-          Show 8 items
-        </button>
-        <button onClick={() => setItemsCount(16)} type="button">
-          Show 16 items
-        </button>
-        <button onClick={() => setItemsCount(catalog.length)} type="button">
-          Show all
-        </button>
-      </header>
+      <CatalogHeader>
+        <ButtonSetCount onClick={() => setItemsCount(8)} type="button">
+          8 items
+        </ButtonSetCount>
+        <ButtonSetCount onClick={() => setItemsCount(16)} type="button">
+          16 items
+        </ButtonSetCount>
+        <ButtonSetCount
+          onClick={() => setItemsCount(catalog.length)}
+          type="button"
+        >
+          All
+        </ButtonSetCount>
+      </CatalogHeader>
       <CatalogListItems>
         {showItems &&
           showItems.map((product) => (

@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
   h3,
   h4,
   p,
+  ul,
   ol[class],
   li,
   figure,

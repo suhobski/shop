@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HeaderWrap = styled('header')({
-  gridArea: 'header',
   padding: '0.5rem',
   color: '#5a5a65',
   background: '#ffffff',

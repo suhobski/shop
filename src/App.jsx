@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Main from './containers/Main';
-import Navigation from './containers/Navigation';
 
 const AppWrapper = styled('div')({
   position: 'relative',
   display: 'grid',
-  gridTemplateColumns: '300px 1fr',
   gridTemplateRows: 'auto 1fr auto',
-  gridTemplateAreas: `
-    "header header"
-    "nav main"
-    "footer footer "`,
   minHeight: '100vh',
   maxWidth: 1280,
   margin: '0 auto',
@@ -23,8 +23,21 @@ const AppWrapper = styled('div')({
 const App = () => (
   <AppWrapper>
     <Header />
-    <Navigation />
-    <Main />
+    <Router>
+      <Switch>
+        <Route path="/products">
+          <Main />
+        </Route>
+        <Route path="/" exact>
+          <Redirect to="products" />
+        </Route>
+        <Route path="*">
+          <div>
+            <h2>404 error</h2>
+          </div>
+        </Route>
+      </Switch>
+    </Router>
     <Footer />
   </AppWrapper>
 );

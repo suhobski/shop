@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NavigationWrap = styled('nav')({
-  gridArea: 'nav',
   border: '1px solid #eeeeee',
 });
 
