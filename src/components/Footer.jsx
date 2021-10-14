@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterWrap = styled('footer')({
-  gridArea: 'footer',
-  border: '1px solid #eeeeee',
+  padding: '0.5rem',
+  textAlign: 'center',
 });
 
 const Footer = () => (

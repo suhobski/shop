@@ -9,6 +9,7 @@ import {
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Main from './containers/Main';
+import ProductDetails from './components/ProductDetails';
 
 const AppWrapper = styled('div')({
   position: 'relative',
@@ -25,6 +26,9 @@ const App = () => (
     <Header />
     <Router>
       <Switch>
+        <Route path="/products/:id">
+          <ProductDetails />
+        </Route>
         <Route path="/products">
           <Main />
         </Route>

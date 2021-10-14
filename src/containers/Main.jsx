@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Catalog from './Catalog';
+import Navigation from './Navigation';
 
-const MainWrap = styled('header')({
-  gridArea: 'main',
+const MainWrap = styled('main')({
   border: '1px solid #eeeeee',
 });
 
 const Main = () => (
   <MainWrap>
-    <h2>Main</h2>
+    <Navigation />
     <Catalog />
   </MainWrap>
 );
