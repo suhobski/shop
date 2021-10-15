@@ -8,16 +8,9 @@ const ProductDetailsWrap = styled('section')({
   padding: '0.5rem',
 });
 
-const ProductDetails = ({
-  fetchComponentCatalog,
-  catalog,
-  createdProducts,
-}) => {
-  console.log('createdProducts', createdProducts);
+const ProductDetails = ({ fetchComponentCatalog, catalog }) => {
   const { id } = useParams();
-  console.log(createdProducts);
-  const allProducts = [...createdProducts, ...catalog];
-  const product = allProducts.find((el) => String(el.id) === String(id));
+  const product = catalog.find((el) => String(el.id) === String(id));
   const {
     category = 'no category',
     description,
@@ -47,7 +40,6 @@ function mapStateToProps(state) {
   console.log('state', state);
   return {
     catalog: state.catalog.catalog,
-    createdProducts: state.createdProducts.createdProducts,
   };
 }
 

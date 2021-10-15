@@ -2,6 +2,8 @@ import {
   FETCH_CATALOG_ERROR,
   FETCH_CATALOG_START,
   FETCH_CATALOG_SUCCESS,
+  CREATE_PRODUCT_ERROR,
+  CREATE_PRODUCT_SUCCESS,
 } from './actionTypes';
 
 export function fetchCatalogStart() {
@@ -43,5 +45,19 @@ export function fetchCatalog() {
     } catch (e) {
       dispatch(fetchCatalogError(e));
     }
+  };
+}
+
+export function createProductSuccess(product) {
+  return {
+    type: CREATE_PRODUCT_SUCCESS,
+    product,
+  };
+}
+
+export function createProductError(e) {
+  return {
+    type: CREATE_PRODUCT_ERROR,
+    error: e,
   };
 }

@@ -2,6 +2,8 @@ import {
   FETCH_CATALOG_ERROR,
   FETCH_CATALOG_START,
   FETCH_CATALOG_SUCCESS,
+  CREATE_PRODUCT_SUCCESS,
+  CREATE_PRODUCT_ERROR,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -15,12 +17,20 @@ export default function catalogReducer(state = initialState, action) {
         ...state,
       };
     case FETCH_CATALOG_SUCCESS:
-      console.log('FETCH CATALOG SUCCESS');
-      console.log('action.catalog', action.catalog);
       return {
+        ...state,
         catalog: [...action.catalog],
       };
     case FETCH_CATALOG_ERROR:
+      return {
+        ...state,
+      };
+    case CREATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        catalog: [...state.catalog, action.product],
+      };
+    case CREATE_PRODUCT_ERROR:
       return {
         ...state,
       };

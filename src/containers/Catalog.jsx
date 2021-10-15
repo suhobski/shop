@@ -38,18 +38,14 @@ const CatalogListItems = styled('ul')({
 const Catalog = ({ fetchComponentCatalog, catalog }) => {
   const [itemsCount, setItemsCount] = useState(8);
   const [isCreatedOnly, setIsCreatedOnly] = useState(false);
-  const createdProducts =
-    JSON.parse(window.localStorage.getItem('createdProducts')) || [];
 
   const getShowItems = () => {
     if (isCreatedOnly) {
-      return catalog.filter((item, index) =>
-        index < itemsCount ? item : false
-      );
+      return catalog
+        .filter((item) => !!item.isCreate)
+        .filter((item, index) => (index < itemsCount ? item : false));
     }
-    return [...createdProducts, ...catalog].filter((item, index) =>
-      index < itemsCount ? item : false
-    );
+    return catalog.filter((item, index) => (index < itemsCount ? item : false));
   };
 
   const showItems = getShowItems();
@@ -108,7 +104,6 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
 function mapStateToProps(state) {
   return {
     catalog: state.catalog.catalog,
-    createdProducts: state.createdProducts.createdProducts,
   };
 }
 

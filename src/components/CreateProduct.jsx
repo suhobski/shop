@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {
   createProductSuccess,
   createProductError,
-} from '../store/actions/createdProducts';
+} from '../store/actions/catalog';
 
 const CreateProductWrap = styled('section')({
   margin: '0 auto',
@@ -56,7 +56,7 @@ const ButtonCancel = styled('button')({
   },
 });
 
-const CreateProduct = ({ createProduct, errorOfCreating }) => {
+const CreateProduct = ({ createProduct, createProductWithError }) => {
   const [resultOfCreation, setResultOfCreation] = useState(null);
   const history = useHistory();
   const {
@@ -67,18 +67,14 @@ const CreateProduct = ({ createProduct, errorOfCreating }) => {
   } = useForm();
 
   const saveInLocalStorage = (product) => {
-    const cachedCreatedProducts =
-      window.localStorage.getItem('createdProducts');
+    const cachedCreatedProducts = window.localStorage.getItem('catalog');
 
     if (cachedCreatedProducts) {
       const storageProducts = JSON.parse(cachedCreatedProducts);
       storageProducts.push(product);
-      window.localStorage.setItem(
-        'createdProducts',
-        JSON.stringify(storageProducts)
-      );
+      window.localStorage.setItem('catalog', JSON.stringify(storageProducts));
     } else {
-      window.localStorage.setItem('createdProducts', JSON.stringify([product]));
+      window.localStorage.setItem('catalog', JSON.stringify([product]));
     }
   };
 
@@ -102,7 +98,7 @@ const CreateProduct = ({ createProduct, errorOfCreating }) => {
 
       const date = new Date();
       const { _id } = data;
-      const newProduct = { ...productData, date, id: _id };
+      const newProduct = { id: _id, date, isCreate: true, ...productData };
 
       saveInLocalStorage(newProduct);
       createProduct(newProduct);
@@ -114,7 +110,7 @@ const CreateProduct = ({ createProduct, errorOfCreating }) => {
         isPudlished: false,
       });
     } catch (e) {
-      errorOfCreating(e);
+      createProductWithError(e);
       showErrorResult();
     }
   };
@@ -179,7 +175,7 @@ const CreateProduct = ({ createProduct, errorOfCreating }) => {
 function mapDispatchToProps(dispatch) {
   return {
     createProduct: (product) => dispatch(createProductSuccess(product)),
-    errorOfCreating: (e) => dispatch(createProductError(e)),
+    createProductWithError: (e) => dispatch(createProductError(e)),
   };
 }
 
