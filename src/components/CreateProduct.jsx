@@ -107,7 +107,7 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
         title: '',
         description: '',
         price: '',
-        isPudlished: false,
+        isPublished: false,
       });
     } catch (e) {
       createProductWithError(e);
@@ -152,7 +152,7 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
           <span style={{ color: 'red' }}>Price is required</span>
         )}
         <label htmlFor="is-publish">
-          <input type="checkbox" id="is-publish" {...register('isPudlished')} />
+          <input type="checkbox" id="is-publish" {...register('isPublished')} />
           to publish
         </label>
         <ButtonsWrap>

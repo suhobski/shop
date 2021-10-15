@@ -26,6 +26,10 @@ const ButtonSetCount = styled('button')((props) => ({
   cursor: 'pointer',
 }));
 
+const ButtonShowCreated = styled(ButtonSetCount)({
+  width: 'auto',
+});
+
 const CatalogListItems = styled('ul')({
   gridArea: 'header',
   display: 'grid',
@@ -36,23 +40,25 @@ const CatalogListItems = styled('ul')({
 });
 
 const Catalog = ({ fetchComponentCatalog, catalog }) => {
-  const [itemsCount, setItemsCount] = useState(8);
-  const [isCreatedOnly, setIsCreatedOnly] = useState(false);
 
   const getShowItems = () => {
+    let newcatalog = [...catalog];
+
     if (isCreatedOnly) {
-      return catalog
-        .filter((item) => !!item.isCreate)
-        .filter((item, index) => (index < itemsCount ? item : false));
+      newcatalog = catalog.filter((item) => item?.isCreate);
     }
-    return catalog.filter((item, index) => (index < itemsCount ? item : false));
+
+    if (isPublishedOnly) {
+      newcatalog = newcatalog.filter((item) => item.isPublished);
+    }
+
+    return newcatalog.filter((item, index) =>
+      index < itemsCount ? item : false
+    );
   };
 
   const showItems = getShowItems();
 
-  const handleChangeSwitch = (event) => {
-    setIsCreatedOnly(event.target.checked);
-  };
 
   useEffect(() => fetchComponentCatalog(), []);
 
@@ -81,10 +87,18 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
         >
           All
         </ButtonSetCount>
-        <span>Only created: </span>
+        <ButtonShowCreated
+          onClick={() => setIsCreatedOnly((prevState) => !prevState)}
+          type="button"
+          background={isCreatedOnly ? '#cccccc' : '#efefef'}
+        >
+          Only created
+        </ButtonShowCreated>
+        <span>Only published: </span>
         <Switch
-          checked={isCreatedOnly}
-          onChange={handleChangeSwitch}
+          disabled={!isCreatedOnly}
+          checked={isPublishedOnly}
+          onChange={() => setIsPublishedOnly(!isPublishedOnly)}
           inputProps={{ 'aria-label': 'controlled' }}
         />
       </CatalogHeader>
