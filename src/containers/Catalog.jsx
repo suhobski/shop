@@ -39,6 +39,7 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
   const [isCreatedOnly, setIsCreatedOnly] = useState(false);
   const createdProducts =
     JSON.parse(window.localStorage.getItem('createdProducts')) || [];
+
   const getShowItems = () => {
     if (isCreatedOnly) {
       return catalog.filter((item, index) =>
@@ -49,8 +50,8 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
       index < itemsCount ? item : false
     );
   };
+
   const showItems = getShowItems();
-  console.log('showItems', showItems);
 
   const handleChangeSwitch = (event) => {
     setIsCreatedOnly(event.target.checked);

@@ -1,14 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router';
 
 const HeaderWrap = styled('header')({
   padding: '0.5rem',
+  borderBottom: '1px solid #eeeeee',
 });
 
-const Header = () => (
-  <HeaderWrap>
-    <h1>Super shop</h1>
-  </HeaderWrap>
-);
+const HeaderTitle = styled('h1')({
+  display: 'inline-block',
+  cursor: 'pointer',
+});
+
+const Header = () => {
+  const history = useHistory();
+
+  return (
+    <HeaderWrap>
+      <HeaderTitle onClick={() => history.push('/')}>Super shop</HeaderTitle>
+    </HeaderWrap>
+  );
+};
 
 export default Header;

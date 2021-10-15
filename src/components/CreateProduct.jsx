@@ -39,6 +39,7 @@ const ButtonsWrap = styled('div')({
   columnGap: '1rem',
   gridTemplateColumns: '1fr 1fr',
 });
+
 const InputSubmit = styled('input')({
   '&:active': {
     background: '#e0e0e0',

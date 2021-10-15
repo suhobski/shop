@@ -24,8 +24,8 @@ const AppWrapper = styled('div')({
 
 const App = () => (
   <AppWrapper>
-    <Header />
     <Router>
+      <Header />
       <Switch>
         <Route path="/create-product">
           <CreateProduct />
