@@ -34,7 +34,8 @@ const Price = styled('p')({
 
 const ProductItem = ({ product }) => {
   // const { id, title, description, image, price, rating } = product;
-  const { id, title, image, price } = product;
+  const defaultImage = 'https://clck.ru/YEDXY';
+  const { id, title, image = defaultImage, price } = product;
   const history = useHistory();
 
   return (
