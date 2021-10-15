@@ -19,10 +19,14 @@ const Form = styled('form')({
   rowGap: '1rem',
   gridTemplateColumns: 'minmax(auto, 500px)',
   '& input': {
+    width: '100%',
     padding: '0.5rem',
     borderRadius: 4,
     border: '1px solid #dddddd',
     outline: 'none',
+  },
+  '& input[type="checkbox"]': {
+    width: 'auto',
   },
 });
 
@@ -55,6 +59,8 @@ const ButtonCancel = styled('button')({
     background: '#e0e0e0',
   },
 });
+
+export { Form, Title, ResultText, ButtonsWrap, InputSubmit, ButtonCancel };
 
 const CreateProduct = ({ createProduct, createProductWithError }) => {
   const [resultOfCreation, setResultOfCreation] = useState(null);
@@ -153,7 +159,7 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
         )}
         <label htmlFor="is-publish">
           <input type="checkbox" id="is-publish" {...register('isPublished')} />
-          to publish
+          publish
         </label>
         <ButtonsWrap>
           <InputSubmit type="submit" />
