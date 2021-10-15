@@ -53,12 +53,12 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
   const getShowItems = () => {
     let newcatalog = [...catalog];
 
-    if (isCreatedOnly) {
-      newcatalog = catalog.filter((item) => item?.isCreate);
+    if (isPublishedOnly) {
+      newcatalog = newcatalog.filter((item) => item.isPublished !== false);
     }
 
-    if (isPublishedOnly) {
-      newcatalog = newcatalog.filter((item) => item.isPublished);
+    if (isCreatedOnly) {
+      newcatalog = newcatalog.filter((item) => item?.isCreate);
     }
 
     return newcatalog.filter((item, index) =>
@@ -111,7 +111,6 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
         </ButtonShowCreated>
         <span>Only published: </span>
         <Switch
-          disabled={!isCreatedOnly}
           checked={isPublishedOnly}
           onChange={() => setIsPublishedOnly(!isPublishedOnly)}
           inputProps={{ 'aria-label': 'controlled' }}
