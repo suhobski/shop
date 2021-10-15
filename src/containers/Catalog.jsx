@@ -40,6 +40,15 @@ const CatalogListItems = styled('ul')({
 });
 
 const Catalog = ({ fetchComponentCatalog, catalog }) => {
+  const initialState = JSON.parse(window.localStorage.getItem('catalogState'));
+
+  const [itemsCount, setItemsCount] = useState(initialState?.itemsCount || 8);
+  const [isCreatedOnly, setIsCreatedOnly] = useState(
+    initialState?.isCreatedOnly || false
+  );
+  const [isPublishedOnly, setIsPublishedOnly] = useState(
+    initialState?.isPublishedOnly || false
+  );
 
   const getShowItems = () => {
     let newcatalog = [...catalog];
@@ -59,6 +68,12 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
 
   const showItems = getShowItems();
 
+  useEffect(() => {
+    window.localStorage.setItem(
+      'catalogState',
+      JSON.stringify({ itemsCount, isCreatedOnly, isPublishedOnly })
+    );
+  }, [itemsCount, isCreatedOnly, isPublishedOnly]);
 
   useEffect(() => fetchComponentCatalog(), []);
 
