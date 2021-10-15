@@ -8,6 +8,10 @@ const ProductDetailsWrap = styled('section')({
   padding: '0.5rem',
 });
 
+const Image = styled('img')({
+  height: 200,
+});
+
 const ProductDetails = ({ fetchComponentCatalog, catalog }) => {
   const { id } = useParams();
   const product = catalog.find((el) => String(el.id) === String(id));
@@ -26,7 +30,7 @@ const ProductDetails = ({ fetchComponentCatalog, catalog }) => {
     <ProductDetailsWrap>
       <h2>{title}</h2>
       <p>Category: {category}</p>
-      <img src={image} alt={title} height="200px" />
+      <Image src={image} alt={title} />
       <p>{description}</p>
       <p>
         Rating: {rating.rate}/5 Count: {rating.count}
@@ -37,7 +41,6 @@ const ProductDetails = ({ fetchComponentCatalog, catalog }) => {
 };
 
 function mapStateToProps(state) {
-  console.log('state', state);
   return {
     catalog: state.catalog.catalog,
   };

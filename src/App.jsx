@@ -11,6 +11,7 @@ import Header from './components/Header';
 import Main from './containers/Main';
 import ProductDetails from './components/ProductDetails';
 import CreateProduct from './components/CreateProduct';
+import EditProduct from './containers/EditProduct';
 
 const AppWrapper = styled('div')({
   position: 'relative',
@@ -27,6 +28,9 @@ const App = () => (
     <Router>
       <Header />
       <Switch>
+        <Route path="/edit-product/:id">
+          <EditProduct />
+        </Route>
         <Route path="/create-product">
           <CreateProduct />
         </Route>
