@@ -5,7 +5,7 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  catalog: [],
+  catalog: JSON.parse(window.localStorage.getItem('catalog')) || [],
 };
 
 export default function catalogReducer(state = initialState, action) {
@@ -15,9 +15,10 @@ export default function catalogReducer(state = initialState, action) {
         ...state,
       };
     case FETCH_CATALOG_SUCCESS:
+      console.log('FETCH CATALOG SUCCESS');
+      console.log('action.catalog', action.catalog);
       return {
-        ...state,
-        catalog: action.catalog,
+        catalog: [...action.catalog],
       };
     case FETCH_CATALOG_ERROR:
       return {

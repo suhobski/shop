@@ -23,6 +23,7 @@ const ButtonSetCount = styled('button')((props) => ({
   outline: 'none',
   borderRadius: 4,
   background: props.background,
+  cursor: 'pointer',
 }));
 
 const CatalogListItems = styled('ul')({
@@ -58,6 +59,7 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
   };
 
   useEffect(() => fetchComponentCatalog(), []);
+
   return (
     <CatalogWrap>
       <CatalogHeader>

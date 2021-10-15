@@ -13,6 +13,7 @@ const ButtonAddProduct = styled('button')({
   outline: 'none',
   borderRadius: 4,
   background: '#b8f2c8',
+  cursor: 'pointer',
   '&:active': {
     background: '#a9deb7',
   },

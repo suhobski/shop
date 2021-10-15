@@ -8,10 +8,24 @@ const ProductDetailsWrap = styled('section')({
   padding: '0.5rem',
 });
 
-const ProductDetails = ({ catalog, fetchComponentCatalog }) => {
+const ProductDetails = ({
+  fetchComponentCatalog,
+  catalog,
+  createdProducts,
+}) => {
+  console.log('createdProducts', createdProducts);
   const { id } = useParams();
-  const product = catalog.find((el) => el.id === +id);
-  const { category, description, image, price, rating, title } = product;
+  console.log(createdProducts);
+  const allProducts = [...createdProducts, ...catalog];
+  const product = allProducts.find((el) => String(el.id) === String(id));
+  const {
+    category = 'no category',
+    description,
+    image = 'https://clck.ru/YEDXY',
+    price,
+    rating = { rate: 0, count: 0 },
+    title,
+  } = product;
 
   useEffect(() => fetchComponentCatalog(), []);
 
@@ -30,8 +44,10 @@ const ProductDetails = ({ catalog, fetchComponentCatalog }) => {
 };
 
 function mapStateToProps(state) {
+  console.log('state', state);
   return {
     catalog: state.catalog.catalog,
+    createdProducts: state.createdProducts.createdProducts,
   };
 }
 

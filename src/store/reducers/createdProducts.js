@@ -4,7 +4,8 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  createdProducts: [],
+  createdProducts:
+    JSON.parse(window.localStorage.getItem('createdProducts')) || [],
 };
 
 export default function createdProductsReducer(state = initialState, action) {
