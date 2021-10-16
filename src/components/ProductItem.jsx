@@ -39,7 +39,8 @@ const ButtonEdit = styled('button')({
   },
 });
 
-const ButtonDelete = styled('button')({
+const ButtonDelete = styled('button')((props) => ({
+  display: props.show ? 'inline-block' : 'none',
   width: '2rem',
   height: '2rem',
   outline: 'none',
@@ -52,7 +53,7 @@ const ButtonDelete = styled('button')({
   '&:active': {
     backgroundColor: '#e0e0e0',
   },
-});
+}));
 
 const ButtonGroup = styled('div')({
   display: 'flex',
@@ -74,8 +75,7 @@ const Price = styled('p')({
   textAlign: 'center',
 });
 
-const ProductItem = ({ product }) => {
-  // const { id, title, description, image, price, rating } = product;
+const ProductItem = ({ product, isCreatedOnly }) => {
   const defaultImage = 'https://clck.ru/YEDXY';
   const { id, title, image = defaultImage, price } = product;
   const history = useHistory();
@@ -90,7 +90,7 @@ const ProductItem = ({ product }) => {
       <ProductHeader>
         <ButtonGroup>
           <ButtonEdit onClick={handleButtonEditClick} />
-          <ButtonDelete />
+          <ButtonDelete show={isCreatedOnly} />
         </ButtonGroup>
         <ProductTitle>{title}</ProductTitle>
       </ProductHeader>

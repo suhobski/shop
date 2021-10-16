@@ -120,7 +120,13 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
         {showItems &&
           showItems.map((product) => {
             if (product.id) {
-              return <ProductItem product={product} key={product.id} />;
+              return (
+                <ProductItem
+                  product={product}
+                  isCreatedOnly={isCreatedOnly}
+                  key={product.id}
+                />
+              );
             }
             return null;
           })}
