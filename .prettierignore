@@ -2,3 +2,5 @@ package.json
 package-lock.json
 .eslintrc.js
 /buuld
+/static
+index.html
