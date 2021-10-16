@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { fetchCatalog } from '../store/actions/catalog';
+import { deleteCatalogProduct, fetchCatalog } from '../store/actions/catalog';
 
 const ProductDetailsWrap = styled('section')({
   position: 'relative',
@@ -33,8 +34,9 @@ const ButtonDelete = styled('button')({
   },
 });
 
-const ProductDetails = ({ fetchComponentCatalog, catalog }) => {
+const ProductDetails = ({ fetchComponentCatalog, catalog, deleteProduct }) => {
   const { id } = useParams();
+  const history = useHistory();
   const product = catalog.find((el) => String(el.id) === String(id));
   const {
     category = 'no category',
@@ -45,11 +47,15 @@ const ProductDetails = ({ fetchComponentCatalog, catalog }) => {
     title,
   } = product;
 
+  const handleButtonDeleteClick = () => {
+    deleteProduct(id);
+    history.push('/');
+  };
   useEffect(() => fetchComponentCatalog(), []);
 
   return (
     <ProductDetailsWrap>
-      <ButtonDelete />
+      <ButtonDelete onClick={handleButtonDeleteClick} />
       <h2>{title}</h2>
       <p>Category: {category}</p>
       <Image src={image} alt={title} />
@@ -71,6 +77,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchComponentCatalog: () => dispatch(fetchCatalog()),
+    deleteProduct: (id) => dispatch(deleteCatalogProduct(id)),
   };
 }
 
