@@ -83,15 +83,17 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
 
       const date = new Date();
       const editedProduct = {
-        id: +responseID,
+        id: responseID,
         date,
         isCreate: true,
         ...productData,
       };
 
+      console.log(editedProduct);
+
       const newCatalog = [...catalog];
       const index = newCatalog.findIndex(
-        (item) => item.id === editedProduct.id
+        (item) => String(item.id) === String(editedProduct.id)
       );
       newCatalog[index] = editedProduct;
 
