@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import { deleteCatalogProduct } from '../store/actions/catalog';
 
 const ProductWrap = styled('li')({
   position: 'relative',
@@ -75,7 +77,7 @@ const Price = styled('p')({
   textAlign: 'center',
 });
 
-const ProductItem = ({ product, isCreatedOnly }) => {
+const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
   const defaultImage = 'https://clck.ru/YEDXY';
   const { id, title, image = defaultImage, price } = product;
   const history = useHistory();
@@ -85,12 +87,20 @@ const ProductItem = ({ product, isCreatedOnly }) => {
     history.push(`/edit-product/${id}`);
   };
 
+  const handleButtonDeleteClick = (e) => {
+    e.stopPropagation();
+    deleteProduct(id);
+  };
+
   return (
     <ProductWrap onClick={() => history.push(`/products/${id}`)}>
       <ProductHeader>
         <ButtonGroup>
           <ButtonEdit onClick={handleButtonEditClick} />
-          <ButtonDelete show={isCreatedOnly} />
+          <ButtonDelete
+            onClick={handleButtonDeleteClick}
+            show={isCreatedOnly}
+          />
         </ButtonGroup>
         <ProductTitle>{title}</ProductTitle>
       </ProductHeader>
@@ -100,4 +110,10 @@ const ProductItem = ({ product, isCreatedOnly }) => {
   );
 };
 
-export default ProductItem;
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteProduct: (id) => dispatch(deleteCatalogProduct(id)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(ProductItem);

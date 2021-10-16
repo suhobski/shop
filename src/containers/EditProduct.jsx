@@ -89,8 +89,6 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
         ...productData,
       };
 
-      console.log(editedProduct);
-
       const newCatalog = [...catalog];
       const index = newCatalog.findIndex(
         (item) => String(item.id) === String(editedProduct.id)

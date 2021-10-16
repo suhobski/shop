@@ -6,6 +6,8 @@ import {
   CREATE_PRODUCT_SUCCESS,
   EDIT_PRODUCT_SUCCESS,
   EDIT_PRODUCT_ERROR,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_ERROR,
 } from './actionTypes';
 
 export function fetchCatalogStart() {
@@ -56,6 +58,20 @@ export function editProductError(e) {
   };
 }
 
+export function deleteProductSuccess(id) {
+  return {
+    type: DELETE_PRODUCT_SUCCESS,
+    id,
+  };
+}
+
+export function deleteProductError(e) {
+  return {
+    type: DELETE_PRODUCT_ERROR,
+    error: e,
+  };
+}
+
 export function fetchCatalog() {
   return async (dispatch) => {
     dispatch(fetchCatalogStart());
@@ -74,6 +90,21 @@ export function fetchCatalog() {
       return;
     } catch (e) {
       dispatch(fetchCatalogError(e));
+    }
+  };
+}
+
+export function deleteCatalogProduct(id) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      dispatch(deleteProductSuccess(data.id));
+      return;
+    } catch (e) {
+      dispatch(deleteProductError(e));
     }
   };
 }
