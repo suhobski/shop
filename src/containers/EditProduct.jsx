@@ -12,7 +12,6 @@ import {
   Title,
   ResultText,
   ButtonsWrap,
-  InputSubmit,
   ButtonCancel,
 } from '../components/CreateProduct';
 
@@ -24,6 +23,12 @@ const EditProductWrap = styled('section')({
 const InputDescription = styled('p')({
   marginBottom: '0.25rem',
   fontSize: '0.75rem',
+});
+
+const InputSubmit = styled('input')({
+  '&:active': {
+    background: '#e0e0e0',
+  },
 });
 
 //  ?COMPONENT==============================================================================================
@@ -44,24 +49,15 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
     image = '',
     price,
     title,
-    isPublished = false,
+    isPublished,
   } = product;
 
   // FUNCTIONS ==========================================================================================
   // const handleButtonCancelClick = () => history.push('/products');
 
-  const saveInLocalStorage = (editedProduct) => {
-    const cachedCreatedProducts = window.localStorage.getItem('catalog');
-    const storageProducts = JSON.parse(cachedCreatedProducts);
-    const index = storageProducts.findIndex((item) => item.id === id);
-    storageProducts[index] = editedProduct;
-    window.localStorage.setItem('catalog', JSON.stringify(storageProducts));
-  };
-
   const showSuccessResult = () => {
     setResultOfCreation('success');
-    setTimeout(() => setResultOfCreation(null), 3000);
-    history.push('/');
+    setTimeout(() => history.push('/'), 3000);
   };
 
   const showErrorResult = () => {
@@ -83,12 +79,24 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
         }),
       });
       const data = await response.json();
+      const { id: responseID } = data;
 
       const date = new Date();
-      const editedProduct = { date, isCreate: true, ...data };
+      const editedProduct = {
+        id: +responseID,
+        date,
+        isCreate: true,
+        ...productData,
+      };
 
-      saveInLocalStorage(editedProduct);
-      editProduct(editedProduct);
+      const newCatalog = [...catalog];
+      const index = newCatalog.findIndex(
+        (item) => item.id === editedProduct.id
+      );
+      newCatalog[index] = editedProduct;
+
+      window.localStorage.setItem('catalog', JSON.stringify(newCatalog));
+      editProduct(newCatalog);
       showSuccessResult();
     } catch (e) {
       editProductWithError(e);
@@ -109,8 +117,7 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
             id="title"
             {...register('title', {
               required: true,
-              pattern: /^[A-Za-zА-Яа-я0-9]+/i,
-              maxLength: 50,
+              maxLength: 100,
             })}
           />
           {errors.title?.type === 'required' && (
@@ -125,7 +132,6 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
             id="category"
             {...register('category', {
               required: true,
-              maxLength: 50,
             })}
           />
         </label>
@@ -148,7 +154,6 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
             id="desctiption"
             {...register('description', {
               required: true,
-              maxLength: 100,
             })}
           />
           {errors.description?.type === 'required' && (
@@ -180,7 +185,9 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
         </label>
         <ButtonsWrap>
           <InputSubmit type="submit" />
-          <ButtonCancel type="button">Cancel</ButtonCancel>
+          <ButtonCancel onClick={() => history.push('/products')} type="button">
+            Cancel
+          </ButtonCancel>
         </ButtonsWrap>
         {resultOfCreation === 'success' && (
           <ResultText>The product has created successfully</ResultText>
@@ -201,7 +208,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    editProduct: (product) => dispatch(editProductSuccess(product)),
+    editProduct: (newCatalog) => dispatch(editProductSuccess(newCatalog)),
     editProductWithError: (e) => dispatch(editProductError(e)),
   };
 }

@@ -4,6 +4,8 @@ import {
   FETCH_CATALOG_SUCCESS,
   CREATE_PRODUCT_SUCCESS,
   CREATE_PRODUCT_ERROR,
+  EDIT_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_ERROR,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -31,6 +33,15 @@ export default function catalogReducer(state = initialState, action) {
         catalog: [...state.catalog, action.product],
       };
     case CREATE_PRODUCT_ERROR:
+      return {
+        ...state,
+      };
+    case EDIT_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        catalog: [...action.catalog],
+      };
+    case EDIT_PRODUCT_ERROR:
       return {
         ...state,
       };
