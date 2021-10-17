@@ -16,7 +16,10 @@ import {
 } from '../components/CreateProduct';
 
 const EditProductWrap = styled('section')({
+  margin: '0.5rem',
   padding: '0.5rem',
+  border: '1px solid #5a5a65',
+  borderRadius: 4,
 });
 
 const InputDescription = styled('p')({
@@ -162,11 +165,21 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
             defaultValue={+price}
             {...register('price', {
               required: true,
-              min: 0.01,
+              validate: (value) => {
+                if (!Number(value)) {
+                  return 'This is validate required.';
+                }
+                return true;
+              },
             })}
           />
           {errors.price?.type === 'required' && (
             <span style={{ color: 'red' }}>Price is required</span>
+          )}
+          {errors.price?.type === 'validate' && (
+            <span style={{ color: 'red' }}>
+              Does not match the price pattern
+            </span>
           )}
         </label>
         <label htmlFor="is-publish">

@@ -6,10 +6,14 @@ import { connect } from 'react-redux';
 import { deleteCatalogProduct, fetchCatalog } from '../store/actions/catalog';
 
 const ProductDetailsWrap = styled('section')({
+  display: 'grid',
+  gridTemplateColumns: 'minmax(200px, 600px)',
+  alignItems: 'top',
   position: 'relative',
-  maxWidth: 600,
-  margin: '0 auto',
+  margin: '0.5rem',
   padding: '0.5rem',
+  border: '1px solid #5a5a65',
+  borderRadius: 4,
 });
 
 const Image = styled('img')({

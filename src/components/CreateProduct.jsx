@@ -10,8 +10,10 @@ import {
 } from '../store/actions/catalog';
 
 const CreateProductWrap = styled('section')({
-  margin: '0 auto',
+  margin: '0.5rem',
   padding: '0.5rem',
+  border: '1px solid #5a5a65',
+  borderRadius: 4,
 });
 
 const Form = styled('form')({
@@ -69,8 +71,11 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
     register,
     formState: { errors },
     reset,
+    trigger,
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    criteriaMode: 'all',
+  });
 
   const saveInLocalStorage = (product) => {
     const cachedCreatedProducts = window.localStorage.getItem('catalog');
@@ -160,6 +165,7 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
         <label htmlFor="is-publish">
           <input type="checkbox" id="is-publish" {...register('isPublished')} />
           publish
+          <span>publish</span>
         </label>
         <ButtonsWrap>
           <InputSubmit type="submit" />

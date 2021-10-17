@@ -17,10 +17,10 @@ const AppWrapper = styled('div')({
   position: 'relative',
   display: 'grid',
   gridTemplateRows: 'auto 1fr auto',
+  alignContent: 'stretch',
   minHeight: '100vh',
   maxWidth: 1280,
   margin: '0 auto',
-  border: '1px solid #eeeeee',
 });
 
 const App = () => (

@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router';
 
 const HeaderWrap = styled('header')({
+  margin: '0.5rem',
+  marginBottom: 0,
   padding: '0.5rem',
-  borderBottom: '1px solid #eeeeee',
+  border: '1px solid #5a5a65',
+  borderRadius: 4,
 });
 
 const HeaderTitle = styled('h1')({

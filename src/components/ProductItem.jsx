@@ -11,7 +11,7 @@ const ProductWrap = styled('li')({
   gridTemplateRows: 'auto 160px 25px',
   rowGap: '0.5rem',
   padding: '0.5rem',
-  border: '1px solid #eeeeee',
+  border: '1px solid #5a5a65',
   borderRadius: 4,
   overflow: 'hidden',
   cursor: 'pointer',

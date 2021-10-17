@@ -1,23 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Switch from '@mui/material/Switch';
-import ProductItem from '../components/ProductItem';
 import { fetchCatalog } from '../store/actions/catalog';
+import ProductItem from '../components/ProductItem';
 
-const CatalogWrap = styled('section')({});
-const CatalogHeader = styled('header')({
+const CatalogWrap = styled('section')({
+  minHeight: '100%',
   padding: '0.5rem',
-  '& button': {
-    marginRight: '0.5rem',
-  },
-  '& button:last-child': {
-    marginRight: 0,
+  border: '1px solid #5a5a65',
+  borderRadius: 4,
+  overflowX: 'auto',
+});
+const CatalogHeader = styled('header')({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+  justifyItems: 'stretch',
+  gap: '0.5rem',
+  padding: '0.5rem',
+  borderRadius: 4,
+});
+
+const CountWrap = styled('div')({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  justifyContent: 'stretch',
+  alignItems: 'center',
+  gap: '0.5rem',
+});
+
+const ButtonAddProduct = styled('button')({
+  padding: '0.5rem',
+  border: 'none',
+  outline: 'none',
+  borderRadius: 4,
+  background: '#b8f2c8',
+  cursor: 'pointer',
+  '&:active': {
+    background: '#a9deb7',
   },
 });
 
 const ButtonSetCount = styled('button')((props) => ({
-  width: 40,
   padding: '0.5rem',
   border: 'none',
   outline: 'none',
@@ -27,21 +52,21 @@ const ButtonSetCount = styled('button')((props) => ({
 }));
 
 const ButtonShowCreated = styled(ButtonSetCount)({
-  width: 'auto',
+  width: '100%',
 });
 
 const CatalogListItems = styled('ul')({
   gridArea: 'header',
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(284px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
   gap: '0.5rem',
-  padding: '0.5rem',
+  padding: 0,
   listStyleType: 'none',
 });
 
 const Catalog = ({ fetchComponentCatalog, catalog }) => {
+  const history = useHistory();
   const initialState = JSON.parse(window.localStorage.getItem('catalogState'));
-
   const [itemsCount, setItemsCount] = useState(initialState?.itemsCount || 8);
   const [isCreatedOnly, setIsCreatedOnly] = useState(
     initialState?.isCreatedOnly || false
@@ -68,6 +93,9 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
 
   const showItems = getShowItems();
 
+  const handleButtonAddProductClick = () =>
+    history.push('/exore-test/create-product');
+
   useEffect(() => {
     window.localStorage.setItem(
       'catalogState',
@@ -80,41 +108,50 @@ const Catalog = ({ fetchComponentCatalog, catalog }) => {
   return (
     <CatalogWrap>
       <CatalogHeader>
-        <span>Count: </span>
-        <ButtonSetCount
-          onClick={() => setItemsCount(8)}
-          type="button"
-          background={itemsCount === 8 ? '#cccccc' : '#efefef'}
-        >
-          8
-        </ButtonSetCount>
-        <ButtonSetCount
-          onClick={() => setItemsCount(16)}
-          type="button"
-          background={itemsCount === 16 ? '#cccccc' : '#efefef'}
-        >
-          16
-        </ButtonSetCount>
-        <ButtonSetCount
-          onClick={() => setItemsCount(catalog.length)}
-          type="button"
-          background={itemsCount === catalog.length ? '#cccccc' : '#efefef'}
-        >
-          All
-        </ButtonSetCount>
-        <ButtonShowCreated
-          onClick={() => setIsCreatedOnly((prevState) => !prevState)}
-          type="button"
-          background={isCreatedOnly ? '#cccccc' : '#efefef'}
-        >
-          Only created
-        </ButtonShowCreated>
-        <span>Only published: </span>
-        <Switch
-          checked={isPublishedOnly}
-          onChange={() => setIsPublishedOnly(!isPublishedOnly)}
-          inputProps={{ 'aria-label': 'controlled' }}
-        />
+        <ButtonAddProduct onClick={handleButtonAddProductClick} type="button">
+          Create product
+        </ButtonAddProduct>
+        <div>
+          <ButtonShowCreated
+            onClick={() => setIsCreatedOnly((prevState) => !prevState)}
+            type="button"
+            background={isCreatedOnly ? '#cccccc' : '#efefef'}
+          >
+            Only created
+          </ButtonShowCreated>
+        </div>
+        <div style={{ justifySelf: 'center' }}>
+          <span>Only published: </span>
+          <Switch
+            checked={isPublishedOnly}
+            onChange={() => setIsPublishedOnly(!isPublishedOnly)}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+        </div>
+        <CountWrap>
+          <span>Count: </span>
+          <ButtonSetCount
+            onClick={() => setItemsCount(8)}
+            type="button"
+            background={itemsCount === 8 ? '#cccccc' : '#efefef'}
+          >
+            8
+          </ButtonSetCount>
+          <ButtonSetCount
+            onClick={() => setItemsCount(16)}
+            type="button"
+            background={itemsCount === 16 ? '#cccccc' : '#efefef'}
+          >
+            16
+          </ButtonSetCount>
+          <ButtonSetCount
+            onClick={() => setItemsCount(catalog.length)}
+            type="button"
+            background={itemsCount === catalog.length ? '#cccccc' : '#efefef'}
+          >
+            All
+          </ButtonSetCount>
+        </CountWrap>
       </CatalogHeader>
       <CatalogListItems>
         {showItems &&
