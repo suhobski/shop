@@ -8,12 +8,16 @@ import { deleteCatalogProduct, fetchCatalog } from '../store/actions/catalog';
 const ProductDetailsWrap = styled('section')({
   display: 'grid',
   gridTemplateColumns: 'minmax(200px, 600px)',
-  alignItems: 'top',
-  position: 'relative',
   margin: '0.5rem',
   padding: '0.5rem',
   border: '1px solid #5a5a65',
   borderRadius: 4,
+});
+
+const ProductDetailsHeader = styled('header')({
+  display: 'grid',
+  gridTemplateColumns: '1fr auto',
+  columnGap: '0.5rem',
 });
 
 const Image = styled('img')({
@@ -21,9 +25,7 @@ const Image = styled('img')({
 });
 
 const ButtonDelete = styled('button')({
-  position: 'relative',
-  left: '90%',
-  display: 'block',
+  left: '95%',
   width: '2rem',
   height: '2rem',
   outline: 'none',
@@ -59,15 +61,17 @@ const ProductDetails = ({ fetchComponentCatalog, catalog, deleteProduct }) => {
 
   return (
     <ProductDetailsWrap>
-      <ButtonDelete onClick={handleButtonDeleteClick} />
-      <h2>{title}</h2>
+      <ProductDetailsHeader>
+        <h2>{title}</h2>
+        <ButtonDelete onClick={handleButtonDeleteClick} />
+      </ProductDetailsHeader>
       <p>Category: {category}</p>
       <Image src={image} alt={title} />
       <p>{description}</p>
       <p>
         Rating: {rating.rate}/5 Count: {rating.count}
       </p>
-      <p>{price}$</p>
+      <p>{Math.round(price * 100) / 100}$</p>
     </ProductDetailsWrap>
   );
 };

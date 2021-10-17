@@ -22,6 +22,9 @@ const ProductWrap = styled('li')({
 });
 
 const ProductHeader = styled('header')({
+  display: 'grid',
+  gridTemplateColumns: '1fr auto',
+  columnGap: '0.5rem',
   width: '100%',
 });
 
@@ -95,6 +98,7 @@ const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
   return (
     <ProductWrap onClick={() => history.push(`/exore-test/products/${id}`)}>
       <ProductHeader>
+        <ProductTitle>{title}</ProductTitle>
         <ButtonGroup>
           <ButtonEdit onClick={handleButtonEditClick} />
           <ButtonDelete
@@ -102,10 +106,9 @@ const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
             show={isCreatedOnly}
           />
         </ButtonGroup>
-        <ProductTitle>{title}</ProductTitle>
       </ProductHeader>
       <img src={image} alt={title} height="150px" />
-      <Price>{price}$</Price>
+      <Price>{Math.round(price * 100) / 100}$</Price>
     </ProductWrap>
   );
 };
