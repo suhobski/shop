@@ -25,7 +25,7 @@ const Navigation = () => {
   return (
     <NavigationWrap>
       <ButtonAddProduct
-        onClick={() => history.push('/create-product')}
+        onClick={() => history.push('/exore-test/create-product')}
         type="button"
       >
         Create product

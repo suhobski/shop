@@ -15,7 +15,6 @@ import {
   ButtonCancel,
 } from '../components/CreateProduct';
 
-// STYLES===================================================================================================
 const EditProductWrap = styled('section')({
   padding: '0.5rem',
 });
@@ -52,12 +51,9 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
     isPublished,
   } = product;
 
-  // FUNCTIONS ==========================================================================================
-  // const handleButtonCancelClick = () => history.push('/products');
-
   const showSuccessResult = () => {
     setResultOfCreation('success');
-    setTimeout(() => history.push('/'), 3000);
+    setTimeout(() => history.push('/exore-test/'), 3000);
   };
 
   const showErrorResult = () => {
@@ -104,7 +100,6 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
     }
   };
 
-  //! RENDER===============================================================================
   return (
     <EditProductWrap>
       <Title>Edit product</Title>

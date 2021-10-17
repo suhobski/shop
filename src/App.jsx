@@ -28,20 +28,20 @@ const App = () => (
     <Router>
       <Header />
       <Switch>
-        <Route path="/edit-product/:id">
+        <Route path="/exore-test/edit-product/:id">
           <EditProduct />
         </Route>
-        <Route path="/create-product">
+        <Route path="/exore-test/create-product">
           <CreateProduct />
         </Route>
-        <Route path="/products/:id">
+        <Route path="/exore-test/products/:id">
           <ProductDetails />
         </Route>
-        <Route path="/products">
+        <Route path="/exore-test/products">
           <Main />
         </Route>
-        <Route path="/" exact>
-          <Redirect to="products" />
+        <Route path="/exore-test/" exact>
+          <Redirect to="/exore-test/products" />
         </Route>
         <Route path="*">
           <div>
@@ -53,5 +53,4 @@ const App = () => (
     <Footer />
   </AppWrapper>
 );
-
 export default App;

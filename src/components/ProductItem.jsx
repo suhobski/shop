@@ -84,7 +84,7 @@ const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
 
   const handleButtonEditClick = (e) => {
     e.stopPropagation();
-    history.push(`/edit-product/${id}`);
+    history.push(`/exore-test/edit-product/${id}`);
   };
 
   const handleButtonDeleteClick = (e) => {
@@ -93,7 +93,7 @@ const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
   };
 
   return (
-    <ProductWrap onClick={() => history.push(`/products/${id}`)}>
+    <ProductWrap onClick={() => history.push(`/exore-test/products/${id}`)}>
       <ProductHeader>
         <ButtonGroup>
           <ButtonEdit onClick={handleButtonEditClick} />

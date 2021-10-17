@@ -163,7 +163,10 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
         </label>
         <ButtonsWrap>
           <InputSubmit type="submit" />
-          <ButtonCancel onClick={() => history.push('/products')} type="button">
+          <ButtonCancel
+            onClick={() => history.push('/exore-test/products')}
+            type="button"
+          >
             Cancel
           </ButtonCancel>
         </ButtonsWrap>

@@ -17,7 +17,9 @@ const Header = () => {
 
   return (
     <HeaderWrap>
-      <HeaderTitle onClick={() => history.push('/')}>Super shop</HeaderTitle>
+      <HeaderTitle onClick={() => history.push('/exore-test/')}>
+        Super shop
+      </HeaderTitle>
     </HeaderWrap>
   );
 };

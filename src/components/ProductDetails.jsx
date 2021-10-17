@@ -49,7 +49,7 @@ const ProductDetails = ({ fetchComponentCatalog, catalog, deleteProduct }) => {
 
   const handleButtonDeleteClick = () => {
     deleteProduct(id);
-    history.push('/');
+    history.push('/exore-test/');
   };
   useEffect(() => fetchComponentCatalog(), []);
 
