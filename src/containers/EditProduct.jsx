@@ -185,10 +185,10 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
           </ButtonCancel>
         </ButtonsWrap>
         {resultOfCreation === 'success' && (
-          <ResultText>The product has created successfully</ResultText>
+          <ResultText>The product has edited successfully</ResultText>
         )}
         {resultOfCreation === 'error' && (
-          <ResultText error>The product hasn&apos;t created</ResultText>
+          <ResultText error>The product hasn&apos;t edited</ResultText>
         )}
       </Form>
     </EditProductWrap>
