@@ -153,18 +153,26 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
         )}
         <input
           placeholder="Price"
-          type="double"
+          onChange={() => trigger}
           {...register('price', {
             required: true,
             min: 0.01,
+            validate: (value) => {
+              if (!Number(value)) {
+                return 'This is validate required.';
+              }
+              return true;
+            },
           })}
         />
         {errors.price?.type === 'required' && (
           <span style={{ color: 'red' }}>Price is required</span>
         )}
+        {errors.price?.type === 'validate' && (
+          <span style={{ color: 'red' }}>Does not match the price pattern</span>
+        )}
         <label htmlFor="is-publish">
           <input type="checkbox" id="is-publish" {...register('isPublished')} />
-          publish
           <span>publish</span>
         </label>
         <ButtonsWrap>
