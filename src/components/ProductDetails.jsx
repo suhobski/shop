@@ -54,9 +54,12 @@ const ProductDetails = ({ fetchComponentCatalog, catalog, deleteProduct }) => {
   } = product;
 
   const handleButtonDeleteClick = () => {
+    const newcatalog = catalog.filter((item) => String(item.id) !== String(id));
+    window.localStorage.setItem('catalog', JSON.stringify(newcatalog));
     deleteProduct(id);
     history.push('/exore-test/');
   };
+
   useEffect(() => fetchComponentCatalog(), []);
 
   return (

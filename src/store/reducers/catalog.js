@@ -48,11 +48,7 @@ export default function catalogReducer(state = initialState, action) {
         ...state,
       };
     case DELETE_PRODUCT_SUCCESS:
-      return {
-        ...state,
-        catalog: [...state.catalog.filter((item) => item.id !== action.id)],
-      };
-    case DELETE_PRODUCT_ERROR:
+      console.log('DELETE_PRODUCT_SUCCESS');
       return {
         ...state,
         catalog: [
@@ -60,6 +56,11 @@ export default function catalogReducer(state = initialState, action) {
             (item) => String(item.id) !== String(action.id)
           ),
         ],
+      };
+    case DELETE_PRODUCT_ERROR:
+      console.log('DELETE_PRODUCT_ERROR');
+      return {
+        ...state,
       };
     default:
       return state;

@@ -92,6 +92,8 @@ const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
 
   const handleButtonDeleteClick = (e) => {
     e.stopPropagation();
+    const newcatalog = catalog.filter((item) => String(item.id) !== String(id));
+    window.localStorage.setItem('catalog', JSON.stringify(newcatalog));
     deleteProduct(id);
   };
 

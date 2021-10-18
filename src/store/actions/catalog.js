@@ -78,6 +78,7 @@ export function fetchCatalog() {
     try {
       const cachedData = window.localStorage.getItem('catalog');
       if (cachedData) {
+        console.log('FETCH LOCAL STORAGE');
         dispatch(fetchCatalogSuccess(JSON.parse(cachedData)));
         return;
       }
@@ -86,6 +87,7 @@ export function fetchCatalog() {
       const data = await response.json();
 
       window.localStorage.setItem('catalog', JSON.stringify(data));
+      console.log('FETCH API');
       dispatch(fetchCatalogSuccess(data));
       return;
     } catch (e) {
@@ -97,11 +99,12 @@ export function fetchCatalog() {
 export function deleteCatalogProduct(id) {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
-        method: 'DELETE',
-      });
-      const data = await response.json();
-      dispatch(deleteProductSuccess(data.id));
+      // Запрос работает некорректно на добавленных продуктах
+      // const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      //   method: 'DELETE',
+      // });
+      // const data = await response.json();
+      dispatch(deleteProductSuccess(id));
       return;
     } catch (e) {
       dispatch(deleteProductError(e));
