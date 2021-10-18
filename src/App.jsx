@@ -12,6 +12,7 @@ import Main from './containers/Main';
 import ProductDetails from './components/ProductDetails';
 import CreateProduct from './components/CreateProduct';
 import EditProduct from './containers/EditProduct';
+import Page404 from './components/Page404';
 
 const AppWrapper = styled('div')({
   position: 'relative',
@@ -44,9 +45,7 @@ const App = () => (
           <Redirect to="/exore-test/products" />
         </Route>
         <Route path="*">
-          <div>
-            <h2>404 error</h2>
-          </div>
+          <Page404 />
         </Route>
       </Switch>
     </Router>
