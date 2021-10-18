@@ -6,7 +6,11 @@ import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { editProductError, editProductSuccess } from '../store/actions/catalog';
+import {
+  deleteCatalogProduct,
+  editProductError,
+  editProductSuccess,
+} from '../store/actions/catalog';
 import {
   Form,
   Title,
@@ -22,6 +26,29 @@ const EditProductWrap = styled('section')({
   borderRadius: 4,
 });
 
+const ProductHeader = styled('header')({
+  display: 'grid',
+  gridTemplateColumns: '1fr auto',
+  columnGap: '0.5rem',
+  width: '100%',
+});
+
+const ButtonDelete = styled('button')({
+  display: 'inline-block',
+  width: '2rem',
+  height: '2rem',
+  outline: 'none',
+  borderRadius: 32,
+  border: 'none',
+  background: 'url(/img/trash.png) no-repeat center',
+  backgroundSize: '17px',
+  cursor: 'pointer',
+  transition: 'all .3s ease-out',
+  '&:active': {
+    backgroundColor: '#e0e0e0',
+  },
+});
+
 const InputDescription = styled('p')({
   marginBottom: '0.25rem',
   fontSize: '0.75rem',
@@ -33,8 +60,12 @@ const InputSubmit = styled('input')({
   },
 });
 
-//  ?COMPONENT==============================================================================================
-const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
+const EditProduct = ({
+  catalog,
+  editProduct,
+  editProductWithError,
+  deleteProduct,
+}) => {
   const [resultOfCreation, setResultOfCreation] = useState(null);
   const history = useHistory();
   const { id } = useParams();
@@ -103,9 +134,19 @@ const EditProduct = ({ catalog, editProduct, editProductWithError }) => {
     }
   };
 
+  const handleButtonDeleteClick = () => {
+    const newcatalog = catalog.filter((item) => String(item.id) !== String(id));
+    window.localStorage.setItem('catalog', JSON.stringify(newcatalog));
+    deleteProduct(id);
+    history.push('/exore-test/');
+  };
+
   return (
     <EditProductWrap>
-      <Title>Edit product</Title>
+      <ProductHeader>
+        <Title>Edit product</Title>
+        <ButtonDelete onClick={handleButtonDeleteClick} />
+      </ProductHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="title">
           <InputDescription>Title</InputDescription>
@@ -221,6 +262,7 @@ function mapDispatchToProps(dispatch) {
   return {
     editProduct: (newCatalog) => dispatch(editProductSuccess(newCatalog)),
     editProductWithError: (e) => dispatch(editProductError(e)),
+    deleteProduct: (id) => dispatch(deleteCatalogProduct(id)),
   };
 }
 

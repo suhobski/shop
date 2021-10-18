@@ -80,7 +80,7 @@ const Price = styled('p')({
   textAlign: 'center',
 });
 
-const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
+const ProductItem = ({ product, isCreatedOnly, deleteProduct, catalog }) => {
   const defaultImage = 'https://clck.ru/YEDXY';
   const { id, title, image = defaultImage, price } = product;
   const history = useHistory();
@@ -115,10 +115,16 @@ const ProductItem = ({ product, isCreatedOnly, deleteProduct }) => {
   );
 };
 
+function mapStateToProps(state) {
+  return {
+    catalog: state.catalog.catalog,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     deleteProduct: (id) => dispatch(deleteCatalogProduct(id)),
   };
 }
 
-export default connect(null, mapDispatchToProps)(ProductItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
