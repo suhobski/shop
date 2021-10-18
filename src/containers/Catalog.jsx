@@ -65,7 +65,6 @@ const CatalogListItems = styled('ul')({
 });
 
 const Catalog = ({ fetchComponentCatalog, catalog }) => {
-  console.log(catalog);
   const history = useHistory();
   const initialState = JSON.parse(window.localStorage.getItem('catalogState'));
   const [itemsCount, setItemsCount] = useState(initialState?.itemsCount || 8);

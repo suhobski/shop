@@ -78,7 +78,6 @@ export function fetchCatalog() {
     try {
       const cachedData = window.localStorage.getItem('catalog');
       if (cachedData) {
-        console.log('FETCH LOCAL STORAGE');
         dispatch(fetchCatalogSuccess(JSON.parse(cachedData)));
         return;
       }
@@ -87,7 +86,6 @@ export function fetchCatalog() {
       const data = await response.json();
 
       window.localStorage.setItem('catalog', JSON.stringify(data));
-      console.log('FETCH API');
       dispatch(fetchCatalogSuccess(data));
       return;
     } catch (e) {
