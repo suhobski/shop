@@ -13,6 +13,7 @@ import ProductDetails from './components/ProductDetails';
 import CreateProduct from './components/CreateProduct';
 import EditProduct from './containers/EditProduct';
 import Page404 from './components/Page404';
+import Auth from './components/Auth/Auth';
 
 const AppWrapper = styled('div')({
   position: 'relative',
@@ -29,6 +30,9 @@ const App = () => (
     <Router>
       <Header />
       <Switch>
+        <Route path="/exore-test/auth">
+          <Auth />
+        </Route>
         <Route path="/exore-test/edit-product/:id">
           <EditProduct />
         </Route>
