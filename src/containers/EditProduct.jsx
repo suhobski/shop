@@ -16,8 +16,9 @@ import {
   Title,
   ResultText,
   ButtonsWrap,
-  ButtonCancel,
 } from '../components/CreateProduct';
+import ButtonDelete from '../components/UI/ButtonDelete/ButtonDelete';
+import Button from '../components/UI/Button/Button';
 
 const EditProductWrap = styled('section')({
   margin: '0.5rem',
@@ -33,31 +34,9 @@ const ProductHeader = styled('header')({
   width: '100%',
 });
 
-const ButtonDelete = styled('button')({
-  display: 'inline-block',
-  width: '2rem',
-  height: '2rem',
-  outline: 'none',
-  borderRadius: 32,
-  border: 'none',
-  background: 'url(/img/trash.png) no-repeat center',
-  backgroundSize: '17px',
-  cursor: 'pointer',
-  transition: 'all .3s ease-out',
-  '&:active': {
-    backgroundColor: '#e0e0e0',
-  },
-});
-
 const InputDescription = styled('p')({
   marginBottom: '0.25rem',
   fontSize: '0.75rem',
-});
-
-const InputSubmit = styled('input')({
-  '&:active': {
-    background: '#e0e0e0',
-  },
 });
 
 const EditProduct = ({
@@ -233,13 +212,13 @@ const EditProduct = ({
           <span>publish</span>
         </label>
         <ButtonsWrap>
-          <InputSubmit type="submit" />
-          <ButtonCancel
+          <Button type="submit" />
+          <Button
             onClick={() => history.push('/exore-test/products')}
             type="button"
           >
             Cancel
-          </ButtonCancel>
+          </Button>
         </ButtonsWrap>
         {resultOfCreation === 'success' && (
           <ResultText>The product has edited successfully</ResultText>

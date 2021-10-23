@@ -8,6 +8,7 @@ import {
   createProductSuccess,
   createProductError,
 } from '../store/actions/catalog';
+import Button from './UI/Button/Button';
 
 const CreateProductWrap = styled('section')({
   margin: '0.5rem',
@@ -52,17 +53,7 @@ const InputSubmit = styled('input')({
   },
 });
 
-const ButtonCancel = styled('button')({
-  padding: '0.5rem',
-  border: '1px solid #dddddd',
-  borderRadius: 4,
-  outline: 'none',
-  '&:active': {
-    background: '#e0e0e0',
-  },
-});
-
-export { Form, Title, ResultText, ButtonsWrap, InputSubmit, ButtonCancel };
+export { Form, Title, ResultText, ButtonsWrap, InputSubmit };
 
 const CreateProduct = ({ createProduct, createProductWithError }) => {
   const [resultOfCreation, setResultOfCreation] = useState(null);
@@ -176,13 +167,13 @@ const CreateProduct = ({ createProduct, createProductWithError }) => {
           <span>publish</span>
         </label>
         <ButtonsWrap>
-          <InputSubmit type="submit" />
-          <ButtonCancel
+          <Button type="submit">OK</Button>
+          <Button
             onClick={() => history.push('/exore-test/products')}
             type="button"
           >
             Cancel
-          </ButtonCancel>
+          </Button>
         </ButtonsWrap>
         {resultOfCreation === 'success' && (
           <ResultText>The product has created successfully</ResultText>
